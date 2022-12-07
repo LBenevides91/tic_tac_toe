@@ -8,5 +8,160 @@
 </head>
 <body>
     
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+
+    <div id="result">Result:</div>
+
+    <div id="playerScore">playerScore:</div>
+    <div id="computerScore">computerScore:</div>
+
+    <div id="winner">Winner:</div>
+
+
 </body>
+<script>
+
+const btnRock = document.querySelector('#rock');
+btnRock.addEventListener('click', () => {
+  game('rock');
+});
+
+const btnPaper = document.querySelector('#paper');
+btnPaper.addEventListener('click', () => {
+  game('paper');
+});
+
+const btnScissors = document.querySelector('#scissors');
+btnScissors.addEventListener('click', () => {
+  game('scissors');
+});
+
+let playerPoints = 0;
+let computerPoints = 0;
+
+// Randomizer to get the information about the computer's choice    
+function getComputerChoice(){
+    const computerChoice = Math.floor(Math.random() * 3) + 1;
+
+    if (computerChoice == 1){
+        return 'paper';
+
+    } else if (computerChoice == 2){
+        return 'scissors';
+
+    } else {
+        return 'rock';
+    }
+}
+
+// Test to create the text about who won
+function ticTacToeRound(playerSelection, computerSelection){
+
+    if ( playerSelection == 'rock' && computerSelection == 'scissors' ) {
+        return 'You win! Rock beats Scissors';
+
+    } else if ( playerSelection == 'scissors' && computerSelection == 'paper' ){
+        return 'You win! Scissors beats Paper';
+
+    } else if ( playerSelection == 'paper' && computerSelection == 'rock' ){
+        return 'You win! Paper beats Rock';
+
+    } if( computerSelection == 'rock' && playerSelection == 'scissors' ) {
+        return 'You lose! Rock beats Scissors';
+
+    } else if ( computerSelection == 'scissors' && playerSelection == 'paper' ){
+        return 'You lose! Scissors beats Paper';
+
+    } else if ( computerSelection == 'paper' && playerSelection == 'rock' ){
+        return 'You lose! Paper beats Rock';
+
+    } else {
+        return 'Draw!!!';
+    }
+}
+
+// Test to verify the text about who won
+function gameScore(playerSelection, computerSelection){
+
+    if ( playerSelection == 'rock' && computerSelection == 'scissors' ) {
+        return 1;
+
+    } else if ( playerSelection == 'scissors' && computerSelection == 'paper' ){
+        return 1;
+
+    } else if ( playerSelection == 'paper' && computerSelection == 'rock' ){
+        return 1;
+
+    } if( computerSelection == 'rock' && playerSelection == 'scissors' ) {
+        return 2;
+
+    } else if ( computerSelection == 'scissors' && playerSelection == 'paper' ){
+        return 2;
+
+    } else if ( computerSelection == 'paper' && playerSelection == 'rock' ){
+        return 2;
+
+    } else {
+        return 0;
+
+    }
+}
+
+
+function game(playerChoice){
+
+    let computerChoice = '';
+    let gameCount = 0;
+
+    const result = document.querySelector('#result');
+   
+    computerChoice = getComputerChoice();
+
+    result.textContent = ticTacToeRound(playerChoice, computerChoice);
+
+    gameCount =  gameScore(playerChoice, computerChoice);
+
+
+    if (gameCount == 1){
+        ++playerPoints;
+        playerResult(playerPoints);
+
+    } else if (gameCount == 2){
+        ++computerPoints;
+        computerResult(computerPoints);
+    }
+
+    decideWinner();
+    
+}
+
+//score generator (i have to do it)
+function playerResult(result){
+    let playerScoreFinal = document.querySelector('#playerScore');
+    playerScoreFinal.textContent = 'Player score: ' + playerPoints;
+}
+
+function computerResult(result){
+    let computerScoreFinal = document.querySelector('#computerScore');
+    computerScoreFinal.textContent = 'Computer score: ' + computerPoints;
+}
+
+function decideWinner(){
+
+    let player = playerPoints;
+    let computer = computerPoints;
+    let winner = document.querySelector('#winner');
+
+    if (player == 5){
+        winner.textContent = 'Player Wins!!!';
+    } else if ( computer == 5){
+        winner.textContent = 'Computer Wins!!!';
+    }
+
+}
+
+</script>
+
 </html>

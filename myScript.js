@@ -50,8 +50,6 @@ function game(){
     let computerScore = 0;
     let gameCount = 0;
 
-    for (let i = 0; i < 6; i++){
-
         player = prompt("Type the player's choice");
         computer = getComputerChoice();
         alert(ticTacToeRound(player, computer));
@@ -66,8 +64,7 @@ function game(){
             playerScore++;
             computerScore++;
         }
-    }
-    
+ /*   
     if (playerScore > computerScore){
         alert ('Player Wins!!!');
 
@@ -77,6 +74,7 @@ function game(){
     } else {
         alert ('It\'s a tie!');
     }
+*/
 }
 
 function gameScore(playerSelection, computerSelection){
@@ -108,4 +106,4 @@ function gameScore(playerSelection, computerSelection){
     }
 }
 
-game();
+
